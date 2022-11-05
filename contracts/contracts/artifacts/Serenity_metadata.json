@@ -1,0 +1,523 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract ISwapRouter",
+						"name": "_swapRouter",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_ephemeralGasMoneyAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "contract IWETH",
+						"name": "_weth9",
+						"type": "address"
+					},
+					{
+						"internalType": "contract IERC20",
+						"name": "_usdc",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "donor",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "ephemeralWallet",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tokenIn",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenAmountIn",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "gasOut",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "usdcOut",
+						"type": "uint256"
+					}
+				],
+				"name": "FountainDeposit",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "donor",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "string",
+						"name": "charity",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "charityAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "usdcAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "FountainDonation",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "donor",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "usdcAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "FountainFinalization",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Paused",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Unpaused",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "USDC",
+				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "WETH9",
+				"outputs": [
+					{
+						"internalType": "contract IWETH",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "ephemeralWalletAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tokenIn",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalAmountIn",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "ethSwapAmountInMax",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint24",
+						"name": "ethSwapPoolFee",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint24",
+						"name": "usdcSwapPoolFee",
+						"type": "uint24"
+					},
+					{
+						"internalType": "uint256",
+						"name": "usdcSwapAmountOutMinimum",
+						"type": "uint256"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "string[]",
+						"name": "charities_",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "amounts_",
+						"type": "uint256[]"
+					}
+				],
+				"name": "finalize",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "userBalance_",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCharityAddresses",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "charityAddresses_",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCharityNames",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "charityNames_",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "paused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "charityName",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "charityAddress",
+						"type": "address"
+					}
+				],
+				"name": "registerCharity",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "swapRouter",
+				"outputs": [
+					{
+						"internalType": "contract ISwapRouter",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"paused()": {
+					"details": "Returns true if the contract is paused, and false otherwise."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/fountain.sol": "Serenity"
+		},
+		"evmVersion": "byzantium",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": [],
+		"viaIR": true
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
+			]
+		},
+		"@openzeppelin/contracts/security/Pausable.sol": {
+			"keccak256": "0x0849d93b16c9940beb286a7864ed02724b248b93e0d80ef6355af5ef15c64773",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ddabb16009cd17eaca3143feadf450ac13e72919ebe2ca50e00f61cb78bc004",
+				"dweb:/ipfs/QmSPwPxX7d6TTWakN5jy5wsaGkS1y9TW8fuhGSraMkLk2B"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0x0e9621f60b2faabe65549f7ed0f24e8853a45c1b7990d47e8160e523683f3935",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://287a2f8d5814dd0f05f22b740f18ca8321acc21c9bd03a6cb2203ea626e2f3f2",
+				"dweb:/ipfs/QmZRQv9iuwU817VuqkA2WweiaibKii69x9QxYBBEfbNEud"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5a7d5b1ef5d8d5889ad2ed89d8619c09383b80b72ab226e0fe7bde1636481e34",
+				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"@openzeppelin/contracts/utils/structs/EnumerableSet.sol": {
+			"keccak256": "0x5050943b32b6a8f282573d166b2e9d87ab7eb4dbba4ab6acf36ecb54fe6995e4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d4831d777a29ebdf9f2caecd70e74b97bff1b70e53622fd0a02aed01e21c8271",
+				"dweb:/ipfs/QmUqurVVnCc7XkMxb2k23TVQUtuhHZduJ3hTZarTJrqU24"
+			]
+		},
+		"@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol": {
+			"keccak256": "0x3f485fb1a44e8fbeadefb5da07d66edab3cfe809f0ac4074b1e54e3eb3c4cf69",
+			"license": "GPL-2.0-or-later",
+			"urls": [
+				"bzz-raw://095ce0626b41318c772b3ebf19d548282607f6a8f3d6c41c13edfbd5370c8652",
+				"dweb:/ipfs/QmVDZfJJ89UUCE1hMyzqpkZAtQ8jUsBgZNE5AMRG7RzRFS"
+			]
+		},
+		"@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol": {
+			"keccak256": "0x9bfaf1feb32814623e627ab70f2409760b15d95f1f9b058e2b3399a8bb732975",
+			"license": "GPL-2.0-or-later",
+			"urls": [
+				"bzz-raw://a8a2c3e55965b61bcd91993d8e1d5d34b8b8a63e0fdfce87a85f6af92526fd53",
+				"dweb:/ipfs/QmQj2CSCSwqDSU4KMNWxGsN2336Cy64WgpV1X1EHXNZWxM"
+			]
+		},
+		"@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol": {
+			"keccak256": "0x9af98b0908c96320ca6d08b22f0efca864742f6adbe5794cafe2d1d2e808b0cd",
+			"license": "GPL-2.0-or-later",
+			"urls": [
+				"bzz-raw://da1d1e81e5bf534f0bf2934b3193db6cb1933f91ec006d2b88e9ad10a617a2d2",
+				"dweb:/ipfs/QmcPBk47QLMFWcX2y2S9eMFsJgoYWBd3R8ey55Bgmv6w6v"
+			]
+		},
+		"contracts/fountain.sol": {
+			"keccak256": "0xd597e764496c624d84492ec0c683310cd5b5c8e2de1499b3796329a4d49d39e8",
+			"license": "Proprietary",
+			"urls": [
+				"bzz-raw://a3795b952bf455e9c06b07ab4adb8e97e1e8f7d67f829f773d8c207661955ad5",
+				"dweb:/ipfs/QmTYpJbrFPRKEk6e8BgCwaMtdiNjcJ9rQG3Po7bCFwTRME"
+			]
+		},
+		"contracts/weth.sol": {
+			"keccak256": "0x787a702bddb9202ee518db255fbdc5a84db2b23b1a2a7ddf45c13655ad335428",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3684e9dc5511f81125501f4c00d5eabacc7188ee8903a48f0b108d625f529430",
+				"dweb:/ipfs/QmXTz4u2ZfhiwiPnvU3qKUytmk9wGsXinStgbVEivwqKUk"
+			]
+		}
+	},
+	"version": 1
+}
