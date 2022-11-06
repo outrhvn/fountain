@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -313,6 +313,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getEphemeralGasAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "ephemeralGasMoneyAmount_",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -358,6 +371,19 @@
 			{
 				"inputs": [],
 				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "newEphemeralGasMoneyAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "setEphemeralGasAmount",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -503,11 +529,11 @@
 			]
 		},
 		"contracts/fountain.sol": {
-			"keccak256": "0xd597e764496c624d84492ec0c683310cd5b5c8e2de1499b3796329a4d49d39e8",
+			"keccak256": "0x08292b834fa476bf8b72c20d50c4d4392a2e536ffb84271fcf9c5dfdfe663bce",
 			"license": "Proprietary",
 			"urls": [
-				"bzz-raw://a3795b952bf455e9c06b07ab4adb8e97e1e8f7d67f829f773d8c207661955ad5",
-				"dweb:/ipfs/QmTYpJbrFPRKEk6e8BgCwaMtdiNjcJ9rQG3Po7bCFwTRME"
+				"bzz-raw://5d7a900daa11a91131af9880940779c5c91703a321218dd11d224fd48039c96f",
+				"dweb:/ipfs/QmVZaVt27KgBjYRpijnuf1uXfF56UHYKjivbS33KnwX95R"
 			]
 		},
 		"contracts/weth.sol": {

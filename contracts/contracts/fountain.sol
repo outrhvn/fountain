@@ -11,7 +11,7 @@ import "@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
 import "@uniswap/v3-periphery/contracts/libraries/TransferHelper.sol";
 import "./weth.sol";
 
-contract Serenity is Ownable, Pausable, ReentrancyGuard {
+contract Fountain is Ownable, Pausable, ReentrancyGuard {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     // mainnet | 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
@@ -27,7 +27,7 @@ contract Serenity is Ownable, Pausable, ReentrancyGuard {
     // polygon | 0xE592427A0AEce92De3Edee1F18E0157C05861564
     ISwapRouter public immutable swapRouter;
 
-    uint256 ephemeralGasMoneyAmount;
+    uint256 private ephemeralGasMoneyAmount;
     
     mapping (address => uint256) private balances;
 
@@ -199,5 +199,13 @@ contract Serenity is Ownable, Pausable, ReentrancyGuard {
 
     function getBalance(address user) public view returns (uint256 userBalance_) {
         userBalance_ = balances[user];
+    }
+
+    function setEphemeralGasAmount(uint256 newEphemeralGasMoneyAmount) public onlyOwner {
+        ephemeralGasMoneyAmount = newEphemeralGasMoneyAmount;
+    }
+
+    function getEphemeralGasAmount() public view returns (uint256 ephemeralGasMoneyAmount_) {
+        ephemeralGasMoneyAmount_ = ephemeralGasMoneyAmount;
     }
 }
